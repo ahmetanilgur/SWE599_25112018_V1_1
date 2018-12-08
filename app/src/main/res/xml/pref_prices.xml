@@ -21,7 +21,7 @@
     <ListPreference
         android:title="Job filter"
         android:key="sort_job"
-        android:defaultValue="Security"
+        android:defaultValue="House Painting"
         android:entries="@array/job_filter_options"
         android:entryValues="@array/job_filter_values"
         >

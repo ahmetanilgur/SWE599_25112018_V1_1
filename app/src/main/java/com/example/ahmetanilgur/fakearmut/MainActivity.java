@@ -30,13 +30,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemClickListener{
     private static final String TAG = "ye";
     private RecyclerView mUserRecyclerView;
     private UserAdapter mUserAdapter;
     private ArrayList<SingleItemUser> mSingleItemUser;
     private RequestQueue mUserRequestQueue;
     private TextView mTextMessage;
+    public ItemClickListener mItemClickListener;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -58,6 +59,11 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    public void onListItemClick(int clickedItemIndex) {
+        Log.v("onClick","Item#"+Integer.toString(clickedItemIndex));
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         mUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSingleItemUser = new ArrayList<>();
         mUserRequestQueue = Volley.newRequestQueue(this);
-        mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser);
+        mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser, this);
         mUserRecyclerView.setAdapter(mUserAdapter);
         Context context = getApplicationContext();
         SharedPreferences sortPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -104,7 +110,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.price_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
+            //Intent detailActivityIntent = new Intent(MainActivity.this, CalendarActivity.class);
+            //        startActivity(detailActivityIntent);
+            // button calendar icin
         }
+
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -126,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                                         String userPrice = hit.getString("price");
                                         mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity, userPrice));
                                     }
-                                    mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser);
+                                    mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser, mItemClickListener);
                                     mUserRecyclerView.setAdapter(mUserAdapter);
                                     mUserAdapter.notifyDataSetChanged();
                                 } catch (JSONException e) {
