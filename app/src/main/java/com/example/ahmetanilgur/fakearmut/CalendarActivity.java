@@ -17,9 +17,9 @@ public class CalendarActivity extends AppCompatActivity {
         TextView t= findViewById(R.id.tv_detail_calendar);
         Intent intentThatStartedThisActivity = getIntent();
         if (intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT)){
-            Log.d(TAG, "onCreate: it does "+intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT));
+            Log.d(TAG, "onCreate: Does it have an intent?:  "+intentThatStartedThisActivity.hasExtra(Intent.EXTRA_TEXT));
             String forecastStr = intentThatStartedThisActivity.getStringExtra(Intent.EXTRA_TEXT);
-            Log.d(TAG, "onCreate: calactivity"+ forecastStr);
+            Log.d(TAG, "calendar activity: "+ forecastStr);
             t.setText(forecastStr);
         }
     }

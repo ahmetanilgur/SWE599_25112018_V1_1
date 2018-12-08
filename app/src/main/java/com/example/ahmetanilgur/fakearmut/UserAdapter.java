@@ -79,14 +79,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
         @Override
         public void onClick(View v) {
-
         int clickedPosition = getAdapterPosition();
             Intent detailActivityIntent = new Intent(mContext, CalendarActivity.class );
-            detailActivityIntent.putExtra(Intent.EXTRA_TEXT, clickedPosition);
+            detailActivityIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(mSingleItemUser.get(clickedPosition).getItemUserName()));
             mContext.startActivity(detailActivityIntent);
-
         }
-
     }
 
 
