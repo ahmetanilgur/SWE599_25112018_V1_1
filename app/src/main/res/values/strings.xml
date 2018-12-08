@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Fake Armut</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="price">Price: $</string>
+    <string name="request_calendar">Request calendar</string>
+    <string name="price_settings">Sort prices</string>
+    <string name="city">City</string>
+</resources>

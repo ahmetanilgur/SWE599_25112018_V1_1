@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="city_filter_options">
+        <item>"Ankara"</item>
+        <item>"Istanbul"</item>
+        <item>"Izmir"</item>
+        <item>"Duzce"</item>
+    </string-array>
+    <string-array name="city_filter_values">
+        <item>"06"</item>
+        <item>"34"</item>
+        <item>"35"</item>
+        <item>"81"</item>
+    </string-array>
+    <string-array name="price_filter_options">
+        <item>"Descending prices"</item>
+        <item>"Ascending prices"</item>
+    </string-array>
+    <string-array name="price_filter_values">
+        <item>"desc"</item>
+        <item>"asc"</item>
+    </string-array>
+    <string-array name="job_filter_options">
+        <item>"House Painting"</item>
+        <item>"Cleaning"</item>
+        <item>"7/24 Security"</item>
+        // INANILMAZ! string array key ve value aynı olursa android ayırt edemiyor.
+    </string-array>
+    <string-array name="job_filter_values">
+        <item>"Painter"</item>
+        <item>"Maid"</item>
+        <item>"Security"</item>
+    </string-array>
+
+</resources>

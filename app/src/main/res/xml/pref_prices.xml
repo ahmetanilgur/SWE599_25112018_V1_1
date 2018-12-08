@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ListPreference
+        android:title="Sort prices"
+        android:key="sort_price"
+        android:defaultValue="Ascending prices"
+        android:entries="@array/price_filter_options"
+        android:entryValues="@array/price_filter_values"
+        >
+    </ListPreference>
+    <ListPreference
+        android:title="City filter"
+        android:key="sort_city"
+        android:defaultValue="34"
+        android:entries="@array/city_filter_options"
+        android:entryValues="@array/city_filter_values"
+        >
+    </ListPreference>
+    <ListPreference
+        android:title="Job filter"
+        android:key="sort_job"
+        android:defaultValue="Security"
+        android:entries="@array/job_filter_options"
+        android:entryValues="@array/job_filter_values"
+        >
+    </ListPreference>
+</PreferenceScreen>
