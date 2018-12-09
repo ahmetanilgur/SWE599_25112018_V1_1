@@ -12,7 +12,7 @@ public class SingleItemUser {
     private String mButtonMonday;
     private String mButtonTuesday;
     private String mButtonWednesday;
-    private String mButtonThurday;
+    private String mButtonThursday;
     private String mButtonFriday;
     private String mButtonSaturday;
     private String mButtonSunday;
@@ -21,7 +21,7 @@ public class SingleItemUser {
                           String userJob,
                           String userCity,
                           String userPrice,
-                          JSONArray  userAvailableDays,
+                          JSONArray userAvailableDays,
                           String buttonMonday,
                           String buttonTuesday,
                           String buttonWednesday,
@@ -37,7 +37,7 @@ public class SingleItemUser {
         mButtonMonday = buttonMonday;
         mButtonTuesday = buttonTuesday;
         mButtonWednesday = buttonWednesday;
-        mButtonThurday = buttonThursday;
+        mButtonThursday = buttonThursday;
         mButtonFriday = buttonFriday;
         mButtonSaturday = buttonSaturday;
         mButtonSunday = buttonSunday;
@@ -52,11 +52,11 @@ public class SingleItemUser {
     public String getItemUserPrice(){ return mUserPrice; }
     public JSONArray getItemUserAvailableDays(){return mUserAvailableDays; }
     public String getButtonMonday() {return mButtonMonday; }
-    public String getButtonTuesday() {return mButtonMonday; }
-    public String getButtonWednesday() {return mButtonMonday; }
-    public String getButtonThursday() {return mButtonMonday; }
-    public String getButtonFriday() {return mButtonMonday; }
-    public String getButtonSaturday() {return mButtonMonday; }
-    public String getButtonSunday() {return mButtonMonday; }
+    public String getButtonTuesday() {return mButtonTuesday; }
+    public String getButtonWednesday() {return mButtonWednesday; }
+    public String getButtonThursday() {return mButtonThursday; }
+    public String getButtonFriday() {return mButtonFriday; }
+    public String getButtonSaturday() {return mButtonSaturday; }
+    public String getButtonSunday() {return mButtonSunday; }
 
 }

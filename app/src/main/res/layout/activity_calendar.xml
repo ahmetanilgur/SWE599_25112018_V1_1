@@ -1,16 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CalendarActivity"
-    android:id="@+id/parent_layout"
-    >
+    android:orientation="vertical"
+    tools:context=".CalendarActivity">
 
     <TextView
-        android:id="@+id/tv_detail_calendar"
-        android:layout_width="wrap_content"
+        android:id="@+id/tv_detail_calendar_username"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/textview"/>
-</RelativeLayout>
+        android:gravity="center"
+        android:text="@string/textview_username"
+        android:textColor="@color/design_default_color_primary"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tv_detail_calendar_job"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/textview_job" />
+
+    <TextView
+        android:id="@+id/tv_detail_calendar_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/textview_price" />
+
+    <Button
+        android:id="@+id/button_calendar_monday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_mon" />
+
+    <Button
+        android:id="@+id/button_calendar_tuesday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_tue" />
+
+    <Button
+        android:id="@+id/button_calendar_wednesday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_wed" />
+
+    <Button
+        android:id="@+id/button_calendar_thursday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_thu" />
+
+    <Button
+        android:id="@+id/button_calendar_friday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_fri" />
+
+    <Button
+        android:id="@+id/button_calendar_saturday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_sat" />
+
+    <Button
+        android:id="@+id/button_calendar_sunday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/req_button_sun" />
+</LinearLayout>

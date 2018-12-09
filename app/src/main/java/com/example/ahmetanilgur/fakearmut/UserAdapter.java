@@ -2,6 +2,7 @@ package com.example.ahmetanilgur.fakearmut;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,12 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import org.json.JSONArray;
 import org.json.JSONException;
-
 import java.util.ArrayList;
-
 import static android.content.ContentValues.TAG;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
@@ -30,12 +28,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @NonNull
     @Override
-    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup
-                                                     parent,
-                                             int viewType) {
-        View view = LayoutInflater.from(mContext)
-                .inflate(R.layout
-                .cv_user_single_item, parent, false);
+    public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(mContext).inflate(R.layout.cv_user_single_item, parent, false);
         UserViewHolder viewHolder = new UserViewHolder(view,mOnClickListener);
         return viewHolder;
     }
@@ -51,10 +45,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         String userPrice = currentItem.getItemUserPrice();
         JSONArray userAvailableDays = currentItem.getItemUserAvailableDays();
         holder.mTextViewUserName.setText(userName);
-        holder.mTextViewUserJob.setText("Job: "+userJob);
-        holder.mTextViewUserPrice.setText("Price: "+userPrice);
-        holder.mTextViewUserCity.setText("City: "+userCity);
-        holder.mTextViewUserAvailableDays.setText("Available Days");
+        holder.mTextViewUserJob.setText("Works as a "+userJob);
+        holder.mTextViewUserPrice.setText("Asks for $"+userPrice+" daily.");
+        holder.mTextViewUserCity.setText("Lives in "+userCity);
         try {
             holder.mButtonMonday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(0)));
             if(!Boolean.parseBoolean(userAvailableDays.getString(0))){
@@ -112,8 +105,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
@@ -143,7 +134,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             mTextViewUserJob = itemView.findViewById(R.id.tv_single_item_job);
             mTextViewUserPrice = itemView.findViewById(R.id.tv_single_item_price);
             mTextViewUserCity = itemView.findViewById(R.id.tv_single_item_city);
-            mTextViewUserAvailableDays = itemView.findViewById(R.id.tv_single_item_available_days);
             mButtonMonday = itemView.findViewById(R.id.button_detail_calendar_mon);
             mButtonTuesday = itemView.findViewById(R.id.button_detail_calendar_tue);
             mButtonWednesday = itemView.findViewById(R.id.button_detail_calendar_wed);
@@ -158,8 +148,23 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public void onClick(View v) {
         int clickedPosition = getAdapterPosition();
             Intent detailActivityIntent = new Intent(mContext, CalendarActivity.class );
-            detailActivityIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(mSingleItemUser.get(clickedPosition).getItemUserName()));
+            Bundle singleItemBundle = new Bundle();
+            singleItemBundle.putString("username",mSingleItemUser.get(clickedPosition).getItemUserName());
+            singleItemBundle.putString("price", mSingleItemUser.get(clickedPosition).getItemUserPrice());
+            singleItemBundle.putString("job", mSingleItemUser.get(clickedPosition).getItemUserJob());
+            singleItemBundle.putString("availability_monday", mSingleItemUser.get(clickedPosition).getButtonMonday());
+            singleItemBundle.putString("availability_tuesday", mSingleItemUser.get(clickedPosition).getButtonTuesday());
+            singleItemBundle.putString("availability_wednesday", mSingleItemUser.get(clickedPosition).getButtonWednesday());
+            singleItemBundle.putString("availability_thursday", mSingleItemUser.get(clickedPosition).getButtonThursday());
+            singleItemBundle.putString("availability_friday", mSingleItemUser.get(clickedPosition).getButtonFriday());
+            singleItemBundle.putString("availability_saturday", mSingleItemUser.get(clickedPosition).getButtonSaturday());
+            singleItemBundle.putString("availability_sunday", mSingleItemUser.get(clickedPosition).getButtonSunday());
+            detailActivityIntent.putExtras(singleItemBundle);
+//            detailActivityIntent.putExtra(Intent.EXTRA_TEXT, String.valueOf(mSingleItemUser.get(clickedPosition).));
             mContext.startActivity(detailActivityIntent);
+            Log.d(TAG, "onClick(userAdapter) : \n"+
+                    "Username: "+ mSingleItemUser);
+
         }
     }
 

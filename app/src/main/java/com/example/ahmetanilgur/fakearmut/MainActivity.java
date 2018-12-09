@@ -65,16 +65,9 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         Log.v("onClick","Item#"+Integer.toString(clickedItemIndex));
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        /*
-        Toast.makeText(MainActivity.this, "last saved sort was: "+sortString,
-           Toast.LENGTH_LONG).show();
-        */
         setContentView(R.layout.activity_main);
         mUserRecyclerView = findViewById(R.id.rv_users);
         mUserRecyclerView.setHasFixedSize(true);
@@ -85,10 +78,9 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         mUserRecyclerView.setAdapter(mUserAdapter);
         Context context = getApplicationContext();
         SharedPreferences sortPref = PreferenceManager.getDefaultSharedPreferences(this);
-        String cityString = sortPref.getString("sort_city","34");
+        String cityString = sortPref.getString("sort_city","IST.");
         String priceString = sortPref.getString("sort_price","Ascending prices");
         String jobString = sortPref.getString("sort_job","House Painting");
-
         parseJSON(cityString, priceString, jobString);
     }
 
@@ -111,9 +103,6 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         if (id == R.id.price_settings) {
             Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
             startActivity(intent);
-            //Intent detailActivityIntent = new Intent(MainActivity.this, CalendarActivity.class);
-            //        startActivity(detailActivityIntent);
-            // button calendar icin
         }
 
 
@@ -145,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
                                         String buttonSaturday = userAvailableDays.getString(5);
                                         String buttonSunday = userAvailableDays.getString(6);
 
-                                        mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity, userPrice, userAvailableDays,
+                                        mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity,
+                                                userPrice, userAvailableDays,
                                                 buttonMonday, buttonTuesday, buttonWednesday,
                                                 buttonThursday, buttonFriday, buttonSaturday, buttonSunday));
                                     }
