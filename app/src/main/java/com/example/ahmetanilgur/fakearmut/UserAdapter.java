@@ -1,5 +1,5 @@
 package com.example.ahmetanilgur.fakearmut;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -8,7 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -36,6 +40,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         return viewHolder;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, final int
             i) {
@@ -44,11 +49,69 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         String userJob = currentItem.getItemUserJob();
         String userCity = currentItem.getItemUserCity();
         String userPrice = currentItem.getItemUserPrice();
+        JSONArray userAvailableDays = currentItem.getItemUserAvailableDays();
         holder.mTextViewUserName.setText(userName);
         holder.mTextViewUserJob.setText("Job: "+userJob);
         holder.mTextViewUserPrice.setText("Price: "+userPrice);
         holder.mTextViewUserCity.setText("City: "+userCity);
+        holder.mTextViewUserAvailableDays.setText("Available Days");
+        try {
+            holder.mButtonMonday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(0)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(0))){
+                holder.mButtonMonday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonTuesday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(1)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(1))){
+                holder.mButtonTuesday.setBackgroundColor(R.color.colorAccent);
+            }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonWednesday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(2)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(2))){
+                holder.mButtonWednesday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonThursday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(3)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(3))){
+                holder.mButtonThursday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonFriday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(4)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(4))){
+                holder.mButtonFriday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonSaturday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(5)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(5))){
+                holder.mButtonSaturday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.mButtonSunday.setClickable(!Boolean.parseBoolean(userAvailableDays.getString(6)));
+            if(!Boolean.parseBoolean(userAvailableDays.getString(6))){
+                holder.mButtonSunday.setBackgroundColor(R.color.colorAccent);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -64,19 +127,33 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public TextView mTextViewUserJob;
         public TextView mTextViewUserPrice;
         public TextView mTextViewUserCity;
-        public ItemClickListener mListener;
+        public TextView mTextViewUserAvailableDays;
+        public Button mButtonMonday;
+        public Button mButtonTuesday;
+        public Button mButtonWednesday;
+        public Button mButtonThursday;
+        public Button mButtonFriday;
+        public Button mButtonSaturday;
+        public Button mButtonSunday;
 
+        public ItemClickListener mListener;
         public UserViewHolder(@NonNull View itemView, ItemClickListener listener) {
             super(itemView);
             mTextViewUserName = itemView.findViewById(R.id.tv_single_item_name);
             mTextViewUserJob = itemView.findViewById(R.id.tv_single_item_job);
             mTextViewUserPrice = itemView.findViewById(R.id.tv_single_item_price);
             mTextViewUserCity = itemView.findViewById(R.id.tv_single_item_city);
+            mTextViewUserAvailableDays = itemView.findViewById(R.id.tv_single_item_available_days);
+            mButtonMonday = itemView.findViewById(R.id.button_detail_calendar_mon);
+            mButtonTuesday = itemView.findViewById(R.id.button_detail_calendar_tue);
+            mButtonWednesday = itemView.findViewById(R.id.button_detail_calendar_wed);
+            mButtonThursday = itemView.findViewById(R.id.button_detail_calendar_thur);
+            mButtonFriday = itemView.findViewById(R.id.button_detail_calendar_fri);
+            mButtonSaturday = itemView.findViewById(R.id.button_detail_calendar_sat);
+            mButtonSunday = itemView.findViewById(R.id.button_detail_calendar_sun);
             mListener = listener;
             itemView.setOnClickListener(this);
-
         }
-
         @Override
         public void onClick(View v) {
         int clickedPosition = getAdapterPosition();

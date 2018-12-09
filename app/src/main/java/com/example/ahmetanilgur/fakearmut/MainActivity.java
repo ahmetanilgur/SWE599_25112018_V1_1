@@ -28,6 +28,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener{
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
     private void parseJSON(String cityPref, String pricePref, String jobPref) {
 
-        String userUrl = "https://599api-dvfgrnalif.now.sh/user/filter_3/"+cityPref+"&"+pricePref+"&"+jobPref;
+        String userUrl = "https://599api-yninfdsjpu.now.sh/user/filter_3/"+cityPref+"&"+pricePref+"&"+jobPref;
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.GET, userUrl, null,
                         new Response.Listener<JSONObject>() {
@@ -135,7 +136,18 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
                                         String userJob = hit.getString("job");
                                         String userCity = hit.getString("city");
                                         String userPrice = hit.getString("price");
-                                        mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity, userPrice));
+                                        JSONArray userAvailableDays = hit.getJSONArray("availableDays");
+                                        String buttonMonday = userAvailableDays.getString(0);
+                                        String buttonTuesday = userAvailableDays.getString(1);
+                                        String buttonWednesday = userAvailableDays.getString(2);
+                                        String buttonThursday = userAvailableDays.getString(3);
+                                        String buttonFriday= userAvailableDays.getString(4);
+                                        String buttonSaturday = userAvailableDays.getString(5);
+                                        String buttonSunday = userAvailableDays.getString(6);
+
+                                        mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity, userPrice, userAvailableDays,
+                                                buttonMonday, buttonTuesday, buttonWednesday,
+                                                buttonThursday, buttonFriday, buttonSaturday, buttonSunday));
                                     }
                                     mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser, mItemClickListener);
                                     mUserRecyclerView.setAdapter(mUserAdapter);

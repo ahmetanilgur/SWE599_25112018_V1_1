@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "za";
-    public TextView mDetailCalendarInfo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,4 +21,6 @@ public class CalendarActivity extends AppCompatActivity {
             t.setText(forecastStr);
         }
     }
+
+
 }
