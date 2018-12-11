@@ -31,5 +31,14 @@
         <item>"Maid"</item>
         <item>"Security"</item>
     </string-array>
+    <string-array name="login_preference_options">
+        <item>"Login as an Employee"</item>
+        <item>"Login as an Employer"</item>
+    </string-array>
+    <string-array name="login_preference_values">
+        <item>"Anıl"</item>
+        <item>"admin"</item>
+    </string-array>
+
 
 </resources>

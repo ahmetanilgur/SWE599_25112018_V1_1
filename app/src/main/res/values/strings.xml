@@ -20,7 +20,7 @@
     <string name="cuma">cuma</string>
     <string name="paz">paz</string>
     <string name="cmt">cmt</string>
-    <string name="req">REQ</string>
+    <string name="req">Request Calendar</string>
     <string name="req_button_mon">Request Monday</string>
     <string name="req_button_tue">Request Tuesday</string>
     <string name="req_button_wed">Request Wednesday</string>
@@ -28,4 +28,15 @@
     <string name="req_button_fri">Request Friday</string>
     <string name="req_button_sat">Request Saturday</string>
     <string name="req_button_sun">Request Sunday</string>
+    <string name="calendar_request_activity">Requests</string>
+    <string name="title_activity_request">RequestActivity</string>
+    <string name="tv_req">TextView</string>
+    <string name="tv_detail_req">TextView</string>
+    <string name="btn_req_accept">Send</string>
+    <string name="btn_req_decline">Cancel</string>
+    <string name="title_activity_list_of_requests">ListOfRequestsActivity</string>
+    <string name="requests_header">Header</string>
+    <string name="requests_question">Question</string>
+    <string name="requests_q_accept">ReqQAccept</string>
+    <string name="requests_q_decline">ReqQDecline</string>
 </resources>

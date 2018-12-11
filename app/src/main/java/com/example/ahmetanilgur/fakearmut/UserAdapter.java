@@ -105,6 +105,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        //setting the calendar button to be available
+            holder.mButtonRequestCalendar.setClickable(false);
+
+
     }
 
     @Override
@@ -126,6 +130,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         public Button mButtonFriday;
         public Button mButtonSaturday;
         public Button mButtonSunday;
+        public Button mButtonRequestCalendar;
 
         public ItemClickListener mListener;
         public UserViewHolder(@NonNull View itemView, ItemClickListener listener) {
@@ -141,13 +146,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             mButtonFriday = itemView.findViewById(R.id.button_detail_calendar_fri);
             mButtonSaturday = itemView.findViewById(R.id.button_detail_calendar_sat);
             mButtonSunday = itemView.findViewById(R.id.button_detail_calendar_sun);
+            mButtonRequestCalendar = itemView.findViewById(R.id.button_detail_calendar_req);
             mListener = listener;
             itemView.setOnClickListener(this);
         }
         @Override
         public void onClick(View v) {
         int clickedPosition = getAdapterPosition();
-            Intent detailActivityIntent = new Intent(mContext, CalendarActivity.class );
+            Intent detailActivityIntent = new Intent(mContext, RequestActivity.class );
             Bundle singleItemBundle = new Bundle();
             singleItemBundle.putString("username",mSingleItemUser.get(clickedPosition).getItemUserName());
             singleItemBundle.putString("price", mSingleItemUser.get(clickedPosition).getItemUserPrice());

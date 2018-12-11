@@ -4,7 +4,12 @@
     tools:context="com.example.ahmetanilgur.fakearmut.MainActivity">
     <item
         android:id="@+id/price_settings"
-        android:orderInCategory="100"
+        android:orderInCategory="101"
         android:title="@string/price_settings"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/calendar_requests"
+        android:orderInCategory="100"
+        android:title="@string/calendar_request_activity"
         app:showAsAction="ifRoom" />
 </menu>

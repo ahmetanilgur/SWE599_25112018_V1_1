@@ -13,7 +13,7 @@
     <ListPreference
         android:title="City filter"
         android:key="sort_city"
-        android:defaultValue="34"
+        android:defaultValue="IST."
         android:entries="@array/city_filter_options"
         android:entryValues="@array/city_filter_values"
         >
@@ -24,6 +24,14 @@
         android:defaultValue="House Painting"
         android:entries="@array/job_filter_options"
         android:entryValues="@array/job_filter_values"
+        >
+    </ListPreference>
+    <ListPreference
+        android:title="Login as"
+        android:key="login_preferences"
+        android:defaultValue="Anıl"
+        android:entries="@array/login_preference_options"
+        android:entryValues="@array/login_preference_values"
         >
     </ListPreference>
 </PreferenceScreen>

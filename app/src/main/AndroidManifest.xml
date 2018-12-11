@@ -32,8 +32,15 @@
             android:resource="@xml/pref_prices"
             android:value=".MainActivity" />
 
-        <activity android:name=".CalendarActivity"></activity>
-
+        <activity android:name=".CalendarActivity" />
+        <activity
+            android:name=".RequestActivity"
+            android:label="@string/title_activity_request"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListOfRequestsActivity"
+            android:label="@string/title_activity_list_of_requests"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

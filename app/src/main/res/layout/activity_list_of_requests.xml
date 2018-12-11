@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ListOfRequestsActivity"
+    tools:showIn="@layout/activity_list_of_requests">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/requests_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests_header"
+        android:textSize="40sp"
+        android:gravity="center"
+        android:paddingBottom="30sp"
+        android:textColor="@color/design_default_color_primary"/>
+
+    <TextView
+        android:id="@+id/requests_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:paddingBottom="30sp"
+        android:text="@string/requests_question" />
+
+    <Button
+        android:id="@+id/requests_q_decline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests_q_decline" />
+    <Button
+        android:id="@+id/requests_q_accept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/requests_q_accept" />
+</LinearLayout>
