@@ -36,7 +36,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="15sp"
-        android:text="@string/tv_detail_req" />
+        android:text="@string/tv_detail_req"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/btn_req_accept"

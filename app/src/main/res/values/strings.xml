@@ -35,8 +35,9 @@
     <string name="btn_req_accept">Send</string>
     <string name="btn_req_decline">Cancel</string>
     <string name="title_activity_list_of_requests">ListOfRequestsActivity</string>
-    <string name="requests_header">Header</string>
+    <string name="requests_header">You do not have any requests!</string>
     <string name="requests_question">Question</string>
     <string name="requests_q_accept">ReqQAccept</string>
     <string name="requests_q_decline">ReqQDecline</string>
+    <string name="allowed_calendars">Calendars</string>
 </resources>

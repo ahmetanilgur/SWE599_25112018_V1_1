@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
             Intent intent = new Intent(MainActivity.this, ListOfRequestsActivity.class);
             startActivity(intent);
         }
+/*        if (id == R.id.allowed_calendars) {
+            Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+            startActivity(intent);
+        }*/
+
 
         return super.onOptionsItemSelected(item);
     }

@@ -20,8 +20,13 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import java.lang.reflect.Array;
+
 public class ListOfRequestsActivity extends AppCompatActivity {
     String username;
+    String[] chiles = { "jalapeno", "anaheim", "serrano",
+            "habanero", "thai" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,22 +42,32 @@ public class ListOfRequestsActivity extends AppCompatActivity {
                 .getDefaultSharedPreferences(getApplicationContext())
                 .getString("login_preferences",""));*/
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "http://192.168.47.40:8001/requestlist/"+PreferenceManager
+                "http://192.168.55.82:8001/requestlist/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences",""),
                 new Response.Listener<String>() {
                     @SuppressLint("ResourceAsColor")
                     @Override
                     public void onResponse(String response) {
-                        username=response;
-                        // Display the first 500 characters of the response string.
-                        requests_header.setText("New requests!");
-                        question.setText(response+" has requested to access your calendar.\n " +
-                                "Would you like to accept the request?");
-                        button_accept.setTextColor(Color.BLUE);
-                        button_accept.setText("Accept");
-                        button_decline.setTextColor(Color.RED);
-                        button_decline.setText("Decline");
+                        Log.d(TAG, "reel response: "+response.length());
+                        if(response.length()<1){
+                            Log.d(TAG, "onResponse: girdi ife");
+                            requests_header.setText("No new requests!");
+                            question.setText("Come back anytime.");
+                            button_accept.setVisibility(View.GONE);
+                            button_decline.setText("Back");
+                        }else {
+                            username=response;
+                            // Display the first 500 characters of the response string.
+                            requests_header.setText("New requests!");
+                            question.setText(response+" has requested to access your calendar.\n " +
+                                    "Would you like to accept the request?");
+                            button_accept.setTextColor(Color.BLUE);
+                            button_accept.setText("Accept");
+                            button_decline.setTextColor(Color.RED);
+                            button_decline.setText("Decline");
+                        }
+
                         Log.d(TAG, "onResponse: clysr jsonp sonuc: "+ response);
                     }
                 }, new Response.ErrorListener() {
@@ -73,7 +88,7 @@ public class ListOfRequestsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                        "http://192.168.47.40:8001/accept/"+
+                        "http://192.168.55.82:8001/accept/"+
                                 username+"&"+PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("login_preferences",""),
                         new Response.Listener<String>() {
@@ -90,7 +105,7 @@ public class ListOfRequestsActivity extends AppCompatActivity {
                     }
                 });
                 Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-                //finish();
+                finish();
             }
         });
 

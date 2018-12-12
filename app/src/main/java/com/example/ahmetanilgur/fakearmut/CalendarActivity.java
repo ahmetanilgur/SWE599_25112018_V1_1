@@ -3,21 +3,30 @@ package com.example.ahmetanilgur.fakearmut;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "za";
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +43,11 @@ public class CalendarActivity extends AppCompatActivity {
         Button b_saturday = findViewById(R.id.button_calendar_saturday);
         Button b_sunday = findViewById(R.id.button_calendar_sunday);
         Intent intentThatStartedThisActivity = getIntent();
+
+
         if (intentThatStartedThisActivity.hasExtra("username")){
 
-            Log.d(TAG, "onCreate: Does it have an intent?:  ");
+            Log.d(TAG, "onCreate: Does it have an intent?:  yes, CalendarActivity");
             String usernameFromIntent = intentThatStartedThisActivity.getStringExtra("username");
             String jobFromIntent = intentThatStartedThisActivity.getStringExtra("job");
             String priceFromIntent = intentThatStartedThisActivity.getStringExtra("price");
@@ -52,6 +63,12 @@ public class CalendarActivity extends AppCompatActivity {
             job.setText("You can hire "+usernameFromIntent+" as a "+jobFromIntent+" for $"+priceFromIntent+" daily.");
             price.setText("Buttons with blue text are "+usernameFromIntent+"'s available days.\n Unfortunately red ones are already taken.\n\n");
             b_monday.setClickable(Boolean.parseBoolean(buttonMonday));
+            b_monday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             if(Boolean.parseBoolean(buttonMonday)){
                 b_monday.setTextColor(Color.BLUE);
             } else b_monday.setTextColor(Color.RED);
@@ -84,6 +101,26 @@ public class CalendarActivity extends AppCompatActivity {
 
 
     }
+    private void parseJSON(String requestDay) {
 
+        StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                "http://192.168.55.82:8001/accept/"+
+                        username+"&"+PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                        .getString("login_preferences",""),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Log.d(TAG, "onResponse: aynn knks clsyr"+ username + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                .getString("login_preferences",""));
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse didnt work");
+            }
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+    }
 
 }
