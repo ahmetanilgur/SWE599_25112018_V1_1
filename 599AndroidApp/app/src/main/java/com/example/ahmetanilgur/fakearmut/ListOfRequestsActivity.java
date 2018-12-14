@@ -21,17 +21,15 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.lang.reflect.Array;
+import java.util.List;
 
 public class ListOfRequestsActivity extends AppCompatActivity {
     String username;
-    String[] chiles = { "jalapeno", "anaheim", "serrano",
-            "habanero", "thai" };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String TAG="lols";
         setContentView(R.layout.activity_list_of_requests);
+        final String TAG="lols";
         final TextView requests_header = findViewById(R.id.requests_header);
         final TextView question = findViewById(R.id.requests_question);
         final Button button_decline = findViewById(R.id.requests_q_decline);
@@ -42,7 +40,7 @@ public class ListOfRequestsActivity extends AppCompatActivity {
                 .getDefaultSharedPreferences(getApplicationContext())
                 .getString("login_preferences",""));*/
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "https://599api-kboubyuoog.now.sh/requestlist/"+PreferenceManager
+                BuildConfig.nowApiUrl+"/requestlist/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences",""),
                 new Response.Listener<String>() {
@@ -87,7 +85,7 @@ public class ListOfRequestsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                        "https://599api-kboubyuoog.now.sh/accept/"+
+                        BuildConfig.nowApiUrl+"/accept/"+
                                 username+"&"+PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("login_preferences",""),
                         new Response.Listener<String>() {
@@ -106,6 +104,8 @@ public class ListOfRequestsActivity extends AppCompatActivity {
                     }
                 });
                 Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                Toast.makeText(ListOfRequestsActivity.this, "You have accepted "+username+"\'s request"+ "!",
+                        Toast.LENGTH_LONG).show();
                 finish();
             }
         });

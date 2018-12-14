@@ -34,14 +34,13 @@
     <string name="tv_detail_req">TextView</string>
     <string name="btn_req_accept">Send</string>
     <string name="btn_req_decline">Cancel</string>
-    <string name="title_activity_list_of_requests">ListOfRequestsActivity</string>
+    <string name="title_activity_list_of_requests">Calendar Access Requests</string>
     <string name="requests_header">You do not have any requests!</string>
     <string name="requests_question">Question</string>
     <string name="requests_q_accept">ReqQAccept</string>
     <string name="requests_q_decline">ReqQDecline</string>
     <string name="allowed_calendars">Calendars</string>
     <string name="req_button_goback">Back</string>
-    <string name="api_url">https://599api-ptbwhoiylf.now.sh</string>
-    <string name="title_activity_list_of_day_requests">ListOfDayRequestsActivity</string>
+    <string name="title_activity_list_of_day_requests">Day Requests</string>
     <string name="day_calendar_request_activity">Day Requests</string>
 </resources>

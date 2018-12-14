@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -37,7 +38,7 @@ public class ListOfDayRequestsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "https://599api-kboubyuoog.now.sh/requesteddaylist/"+PreferenceManager
+                BuildConfig.nowApiUrl+"/requesteddaylist/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences",""),
                 new Response.Listener<String>() {
@@ -99,7 +100,7 @@ public class ListOfDayRequestsActivity extends AppCompatActivity {
                 StringRequest stringRequest = null;
                 try {
                     stringRequest = new StringRequest(Request.Method.GET,
-                            "https://599api-kboubyuoog.now.sh/acceptdayrequest/"
+                            BuildConfig.nowApiUrl+"/acceptdayrequest/"
                                     +username
                                     +"&"
                                     +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
@@ -123,6 +124,12 @@ public class ListOfDayRequestsActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                try {
+                    Toast.makeText(ListOfDayRequestsActivity.this, "You have accepted "+username+"\'s request for "+ dayreqjsonarray.getString(0)+"!",
+                            Toast.LENGTH_LONG).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 finish();
             }
         });

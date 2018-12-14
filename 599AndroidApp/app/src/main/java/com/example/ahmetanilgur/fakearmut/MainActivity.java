@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         String priceString = sortPref.getString("sort_price","Ascending prices");
         String jobString = sortPref.getString("sort_job","House Painting");
         parseJSON(cityString, priceString, jobString);
+        Log.d(TAG, "onCreate: buildconfig dalgası: "+BuildConfig.nowApiUrl);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
 
     private void parseJSON(String cityPref, String pricePref, String jobPref) {
 
-        String userUrl = "https://599api-kboubyuoog.now.sh/user/filter_3/"+cityPref+"&"+pricePref+"&"+jobPref;
+        String userUrl = BuildConfig.nowApiUrl+"/user/filter_3/"+cityPref+"&"+pricePref+"&"+jobPref;
         JsonObjectRequest request = new JsonObjectRequest
                 (Request.Method.GET, userUrl, null,
                         new Response.Listener<JSONObject>() {

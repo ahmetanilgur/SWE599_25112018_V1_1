@@ -34,7 +34,7 @@ public class RequestActivity extends AppCompatActivity {
         Intent intentThatStartedThisActivity = getIntent();
        // Log.d(TAG, "onCreate: ilk oncrrate"+ intentThatStartedThisActivity.getStringExtra("username"));
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "https://599api-kboubyuoog.now.sh/isaccepted/"+PreferenceManager
+                BuildConfig.nowApiUrl+"/isaccepted/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences","")
                         +"&"+intentThatStartedThisActivity.getStringExtra("username"),
@@ -74,7 +74,7 @@ public class RequestActivity extends AppCompatActivity {
                                 public void onClick(View v) {
 
                                     StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                                            "https://599api-kboubyuoog.now.sh/request/"+PreferenceManager
+                                            BuildConfig.nowApiUrl+"/request/"+PreferenceManager
                                                     .getDefaultSharedPreferences(getApplicationContext())
                                                     .getString("login_preferences","")
                                                     +"&"+username.getText(),
