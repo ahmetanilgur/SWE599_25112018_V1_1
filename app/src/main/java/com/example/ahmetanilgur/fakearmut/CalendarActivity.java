@@ -42,6 +42,7 @@ public class CalendarActivity extends AppCompatActivity {
         Button b_friday = findViewById(R.id.button_calendar_friday);
         Button b_saturday = findViewById(R.id.button_calendar_saturday);
         Button b_sunday = findViewById(R.id.button_calendar_sunday);
+        Button b_back = findViewById(R.id.button_calendar_goback);
         Intent intentThatStartedThisActivity = getIntent();
 
 
@@ -60,67 +61,265 @@ public class CalendarActivity extends AppCompatActivity {
             String buttonSunday = intentThatStartedThisActivity.getStringExtra("availability_sunday");
 
             username.setText(usernameFromIntent);
-            job.setText("You can hire "+usernameFromIntent+" as a "+jobFromIntent+" for $"+priceFromIntent+" daily.");
-            price.setText("Buttons with blue text are "+usernameFromIntent+"'s available days.\n Unfortunately red ones are already taken.\n\n");
+            job.setText("You can hire "
+                    +usernameFromIntent
+                    +" as a "
+                    +jobFromIntent
+                    +" for $"
+                    +priceFromIntent
+                    +" daily.");
+            price.setText("Buttons with blue text are "
+                    +usernameFromIntent
+                    +"'s available days.\n Unfortunately red ones are already taken.\n\n");
             b_monday.setClickable(Boolean.parseBoolean(buttonMonday));
             b_monday.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                  StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&monday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
                 }
             });
             if(Boolean.parseBoolean(buttonMonday)){
                 b_monday.setTextColor(Color.BLUE);
             } else b_monday.setTextColor(Color.RED);
             b_tuesday.setClickable(Boolean.parseBoolean(buttonTuesday));
+            b_tuesday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&tuesday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonTuesday)){
                 b_tuesday.setTextColor(Color.BLUE);
             } else b_tuesday.setTextColor(Color.RED);
             b_wednesday.setClickable(Boolean.parseBoolean(buttonWednesday));
+            b_wednesday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&wednesday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonWednesday)){
                 b_wednesday.setTextColor(Color.BLUE);
             } else b_wednesday.setTextColor(Color.RED);
             b_thursday.setClickable(Boolean.parseBoolean(buttonThursday));
+            b_thursday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&thursday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonThursday)){
                 b_thursday.setTextColor(Color.BLUE);
             } else b_thursday.setTextColor(Color.RED);
             b_friday.setClickable(Boolean.parseBoolean(buttonFriday));
+            b_friday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&friday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonFriday)){
                 b_friday.setTextColor(Color.BLUE);
             } else b_friday.setTextColor(Color.RED);
             b_saturday.setClickable(Boolean.parseBoolean(buttonSaturday));
+            b_saturday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&saturday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonSaturday)){
                 b_saturday.setTextColor(Color.BLUE);
             } else b_saturday.setTextColor(Color.RED);
             b_sunday.setClickable(Boolean.parseBoolean(buttonSunday));
+            b_sunday.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    StringRequest stringRequest = new StringRequest(Request.Method.GET,
+                            "https://599api-kboubyuoog.now.sh/requestday/"
+                                    +PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                    .getString("login_preferences","")
+                                    +"&"
+                                    +getIntent().getStringExtra("username")
+                                    +"&sunday",
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    // Display the first 500 characters of the response string.
+                                    Log.d(TAG, "onResponse: aynn knks clsyr"
+                                            + getIntent().getStringExtra("username")
+                                            + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                            .getString("login_preferences",""));
+                                }
+                            }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d(TAG, "onErrorResponse didnt work");
+                        }
+                    });
+                    Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
+                    Log.d(TAG, "onClick: "+((Button) v).getText());
+                    finish();
+                }
+            });
             if(Boolean.parseBoolean(buttonSunday)){
                 b_sunday.setTextColor(Color.BLUE);
             } else b_sunday.setTextColor(Color.RED);
-
+            b_back.setClickable(true);
+            b_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
 
 
     }
-    private void parseJSON(String requestDay) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "http://192.168.55.82:8001/accept/"+
-                        username+"&"+PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                        .getString("login_preferences",""),
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Log.d(TAG, "onResponse: aynn knks clsyr"+ username + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
-                                .getString("login_preferences",""));
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d(TAG, "onErrorResponse didnt work");
-            }
-        });
-        Volley.newRequestQueue(getApplicationContext()).add(stringRequest);
-    }
 
 }

@@ -29,6 +29,7 @@
             android:contentDescription="@string/todo"
             android:fontFamily="sans-serif"
             android:src="@drawable/ppfbphoto"
+            android:id="@+id/tv_single_item_photo"
             android:text="@string/imaj"></ImageView>
 
         <TextView

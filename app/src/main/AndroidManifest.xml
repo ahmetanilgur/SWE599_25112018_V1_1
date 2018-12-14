@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="api.url"
+            android:value="https://599api-ptbwhoiylf.now.sh" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,6 +44,10 @@
         <activity
             android:name=".ListOfRequestsActivity"
             android:label="@string/title_activity_list_of_requests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ListOfDayRequestsActivity"
+            android:label="@string/title_activity_list_of_day_requests"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

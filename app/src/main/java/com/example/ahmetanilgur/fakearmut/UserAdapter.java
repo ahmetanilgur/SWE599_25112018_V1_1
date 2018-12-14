@@ -15,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import java.util.ArrayList;
 import static android.content.ContentValues.TAG;
-
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
     public Context mContext;
     public ArrayList<SingleItemUser> mSingleItemUser;
@@ -25,7 +24,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         mSingleItemUser = userList;
         mOnClickListener = listener;
     }
-
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -33,7 +31,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         UserViewHolder viewHolder = new UserViewHolder(view,mOnClickListener);
         return viewHolder;
     }
-
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, final int

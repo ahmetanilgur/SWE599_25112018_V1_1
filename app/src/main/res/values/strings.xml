@@ -40,4 +40,8 @@
     <string name="requests_q_accept">ReqQAccept</string>
     <string name="requests_q_decline">ReqQDecline</string>
     <string name="allowed_calendars">Calendars</string>
+    <string name="req_button_goback">Back</string>
+    <string name="api_url">https://599api-ptbwhoiylf.now.sh</string>
+    <string name="title_activity_list_of_day_requests">ListOfDayRequestsActivity</string>
+    <string name="day_calendar_request_activity">Day Requests</string>
 </resources>

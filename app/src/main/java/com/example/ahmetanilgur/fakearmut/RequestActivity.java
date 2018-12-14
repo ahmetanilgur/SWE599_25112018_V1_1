@@ -31,11 +31,10 @@ public class RequestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences login_preference = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-
         Intent intentThatStartedThisActivity = getIntent();
        // Log.d(TAG, "onCreate: ilk oncrrate"+ intentThatStartedThisActivity.getStringExtra("username"));
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "http://192.168.55.82:8001/isaccepted/"+PreferenceManager
+                "https://599api-kboubyuoog.now.sh/isaccepted/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences","")
                         +"&"+intentThatStartedThisActivity.getStringExtra("username"),
@@ -54,7 +53,6 @@ public class RequestActivity extends AppCompatActivity {
                             setContentView(R.layout.activity_request);
                             //Shared preflere asagidaki linedan "admin" alabiliyoruz.
                             //Log.d(TAG, "onCreate: "+login_preference.getString("login_preferences",""));
-
                             final TextView username = findViewById(R.id.tv_requests_username);
                             final TextView question = findViewById(R.id.tv_detail_requests_question);
                             Button button_decline = findViewById(R.id.btn_req_decline);
@@ -76,7 +74,7 @@ public class RequestActivity extends AppCompatActivity {
                                 public void onClick(View v) {
 
                                     StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                                            "http://192.168.55.82:8001/request/"+PreferenceManager
+                                            "https://599api-kboubyuoog.now.sh/request/"+PreferenceManager
                                                     .getDefaultSharedPreferences(getApplicationContext())
                                                     .getString("login_preferences","")
                                                     +"&"+username.getText(),

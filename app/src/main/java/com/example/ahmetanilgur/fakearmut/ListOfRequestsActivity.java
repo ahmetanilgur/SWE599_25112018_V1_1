@@ -34,15 +34,15 @@ public class ListOfRequestsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_of_requests);
         final TextView requests_header = findViewById(R.id.requests_header);
         final TextView question = findViewById(R.id.requests_question);
-        final Button button_decline = findViewById(R.id.requests_q_accept);
-        final Button button_accept = findViewById(R.id.requests_q_decline);
+        final Button button_decline = findViewById(R.id.requests_q_decline);
+        final Button button_accept = findViewById(R.id.requests_q_accept);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
        /* Log.d(TAG, "onCreate: "+PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext())
                 .getString("login_preferences",""));*/
         StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
-                "http://192.168.55.82:8001/requestlist/"+PreferenceManager
+                "https://599api-kboubyuoog.now.sh/requestlist/"+PreferenceManager
                         .getDefaultSharedPreferences(getApplicationContext())
                         .getString("login_preferences",""),
                 new Response.Listener<String>() {
@@ -56,15 +56,14 @@ public class ListOfRequestsActivity extends AppCompatActivity {
                             question.setText("Come back anytime.");
                             button_accept.setVisibility(View.GONE);
                             button_decline.setText("Back");
-                        }else {
+                        }
+                        else {
                             username=response;
                             // Display the first 500 characters of the response string.
                             requests_header.setText("New requests!");
                             question.setText(response+" has requested to access your calendar.\n " +
                                     "Would you like to accept the request?");
-                            button_accept.setTextColor(Color.BLUE);
                             button_accept.setText("Accept");
-                            button_decline.setTextColor(Color.RED);
                             button_decline.setText("Decline");
                         }
 
@@ -88,14 +87,16 @@ public class ListOfRequestsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                        "http://192.168.55.82:8001/accept/"+
+                        "https://599api-kboubyuoog.now.sh/accept/"+
                                 username+"&"+PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("login_preferences",""),
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 // Display the first 500 characters of the response string.
-                                Log.d(TAG, "onResponse: aynn knks clsyr"+ username + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
+                                Log.d(TAG, "onResponse: aynn knks clsyr"
+                                        + username
+                                        + PreferenceManager.getDefaultSharedPreferences(getApplicationContext())
                                         .getString("login_preferences",""));
                             }
                         }, new Response.ErrorListener() {

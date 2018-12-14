@@ -12,9 +12,9 @@
         android:orderInCategory="100"
         android:title="@string/calendar_request_activity"
         app:showAsAction="ifRoom" />
-<!--    <item
-        android:id="@+id/allowed_calendars"
+   <item
+        android:id="@+id/day_calendar_requests"
         android:orderInCategory="99"
-        android:title="@string/allowed_calendars"
-        app:showAsAction="ifRoom" />-->
+        android:title="@string/day_calendar_request_activity"
+        app:showAsAction="ifRoom" />
 </menu>

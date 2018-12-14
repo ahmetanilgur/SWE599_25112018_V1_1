@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTintMode="screen"
     android:orientation="vertical"
     tools:context=".CalendarActivity">
 
@@ -21,14 +22,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/textview_job" />
+        android:text="@string/textview_job"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_detail_calendar_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/textview_price" />
+        android:text="@string/textview_price"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button_calendar_monday"
@@ -71,4 +74,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/req_button_sun" />
+
+    <Button
+        android:id="@+id/button_calendar_goback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:background="@android:color/holo_red_light"
+        android:text="@string/req_button_goback"
+        android:textColor="@color/colorWhite" />
 </LinearLayout>

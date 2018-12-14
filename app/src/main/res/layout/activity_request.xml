@@ -43,14 +43,17 @@
         android:id="@+id/btn_req_accept"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorPrimary"
-        android:text="@string/btn_req_accept" />
+        android:background="@color/design_default_color_primary"
+        android:text="@string/btn_req_accept"
+        android:textColor="@color/colorWhite" />
 
     <Button
+        android:layout_marginTop="5sp"
         android:id="@+id/btn_req_decline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorAccent"
-        android:text="@string/btn_req_decline" />
+        android:background="@android:color/holo_red_light"
+        android:text="@string/btn_req_decline"
+        android:textColor="@color/colorWhite" />
 
 </LinearLayout>
