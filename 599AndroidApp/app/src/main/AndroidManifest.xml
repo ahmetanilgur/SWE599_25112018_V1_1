@@ -31,6 +31,12 @@
                 android:value=".MainActivity" />
         </activity>
 
+        <provider
+            android:name=".data.UserProvider"
+            android:authorities="com.example.ahmetanilgur.fakearmut"
+            android:enabled="true"
+            android:exported="true" />
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/pref_prices"
@@ -48,6 +54,21 @@
         <activity
             android:name=".ListOfDayRequestsActivity"
             android:label="@string/title_activity_list_of_day_requests"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name=".data.UserProvider"
+            android:authorities="com.example.ahmetanilgur.fakearmut"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".AcceptedActivity"
+            android:label="@string/title_activity_accepted"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

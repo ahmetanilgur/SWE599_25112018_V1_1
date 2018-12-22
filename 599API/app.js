@@ -196,79 +196,166 @@ app.listen(8000, () => {
                 }
             });
         }),
-        app.get("/acceptdayrequest/:requester&:requestee&:requestedday", (req, res) => {
-            database.collection("RequestedDayCollection").updateMany({ "requester": req.params.requester, "requestee": req.params.requestee, "requestedDay": req.params.requestedday },
-                { $set: { "isAccepted": "true" } }, { upsert: false }, (error, result) => {
-                    
+        app.get("/profile/:requestee", (req, res) => {
+            database.collection("RequestedDayCollection")
+                .find({ $and: [{ "requestee": req.params.requestee }, { "isAccepted": "true" }] })
+                .toArray((error, result) => {
                     if (error) {
                         return res.status(500).send(error);
                     }
-                    switch(req.params.requestedday){
-                        case "monday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.0": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "tuesday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.1": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "wednesday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.2": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "thursday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.3": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "friday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.4": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "saturday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.5": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        break;
-                        case "sunday":
-                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays":false }, { $set: { "availableDays.6": false } }, (error2, result2) => {
-                            if (error2) {
-                                return res.status(500).send(error2);
-                            }
-                            console.log("result: "+result+"\n"+"result2: "+result2)
-                            res.send(result+result2);
-                        });
-                        
+                    if (result) {
+                        res.jsonp({result});
                     }
-                  
+                    else {
+                        res.jsonp(null)
+                    }
+                })
+        }),
+        app.get("/acceptdayrequest/:requester&:requestee&:requestedday", (req, res) => {
+            database.collection("RequestedDayCollection").updateMany({ "requester": req.params.requester, "requestee": req.params.requestee, "requestedDay": req.params.requestedday },
+                { $set: { "isAccepted": "true" } }, { upsert: false }, (error, result) => {
+
+                    if (error) {
+                        return res.status(500).send(error);
+                    }
+                    switch (req.params.requestedday) {
+                        case "monday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.0": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "tuesday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.1": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "wednesday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.2": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "thursday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.3": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "friday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.4": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "saturday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.5": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+                            break;
+                        case "sunday":
+                            database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.6": false } }, (error2, result2) => {
+                                if (error2) {
+                                    return res.status(500).send(error2);
+                                }
+                                console.log("result: " + result + "\n" + "result2: " + result2)
+                                res.send(result + result2);
+                            });
+
+                    }
+
                 })
         })
-});
+}),
+    app.get("/canceldayrequest/:requestee&:requester&:requestedday", (req, res) => {
+        database.collection("RequestedDayCollection").deleteMany({ "requester": req.params.requester, "requestee": req.params.requestee, "requestedDay": req.params.requestedday }, (error, result) => {
+
+                if (error) {
+                    return res.status(500).send(error);
+                }
+                switch (req.params.requestedday) {
+                    case "monday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.0": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "tuesday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.1": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "wednesday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.2": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "thursday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.3": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "friday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.4": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "saturday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.5": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                        break;
+                    case "sunday":
+                        database.collection("UserCollection").updateOne({ "name": req.params.requestee, "availableDays": false }, { $set: { "availableDays.6": true } }, (error2, result2) => {
+                            if (error2) {
+                                return res.status(500).send(error2);
+                            }
+                            console.log("result: " + result + "\n" + "result2: " + result2)
+                            res.jsonp(result);
+                        });
+                }
+            })
+    });

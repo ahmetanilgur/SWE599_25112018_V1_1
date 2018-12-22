@@ -43,4 +43,11 @@
     <string name="req_button_goback">Back</string>
     <string name="title_activity_list_of_day_requests">Day Requests</string>
     <string name="day_calendar_request_activity">Day Requests</string>
+    <string name="accepted_requests">Accepted Requests</string>
+    <string name="title_activity_accepted">AcceptedActivity</string>
+    <string name="you_have_accepted">You have accepted these requests. \n Click any of them to cancel the appointment.</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+    <string name="profile_pic">TODO</string>
+    <string name="my_profile">My Profile</string>
+    <string name="profile_desc">You can see your reservations below. \nClick any of them to cancel.</string>
 </resources>

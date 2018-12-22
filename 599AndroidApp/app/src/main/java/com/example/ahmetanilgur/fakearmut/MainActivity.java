@@ -1,9 +1,15 @@
 package com.example.ahmetanilgur.fakearmut;
 
+import android.content.ContentResolver;
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -23,15 +29,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ahmetanilgur.fakearmut.data.UserContract;
+import com.example.ahmetanilgur.fakearmut.data.UserDBHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements ItemClickListener{
+    private SQLiteDatabase mDatabase;
     private static final String TAG = "ye";
     private RecyclerView mUserRecyclerView;
     private UserAdapter mUserAdapter;
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     private RequestQueue mUserRequestQueue;
     private TextView mTextMessage;
     public ItemClickListener mItemClickListener;
+    ContentResolver mResolver;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -69,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        UserDBHelper dbHelper = new UserDBHelper(this);
+        mDatabase = dbHelper.getWritableDatabase();
         mUserRecyclerView = findViewById(R.id.rv_users);
         mUserRecyclerView.setHasFixedSize(true);
         mUserRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser, this);
         mUserRecyclerView.setAdapter(mUserAdapter);
         Context context = getApplicationContext();
+        mResolver = context.getContentResolver();
         SharedPreferences sortPref = PreferenceManager.getDefaultSharedPreferences(this);
         String cityString = sortPref.getString("sort_city","IST.");
         String priceString = sortPref.getString("sort_price","Ascending prices");
@@ -84,6 +96,51 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         parseJSON(cityString, priceString, jobString);
         Log.d(TAG, "onCreate: buildconfig dalgası: "+BuildConfig.nowApiUrl);
     }
+
+  Uri insertNewUser (String name, String job, String city, String price,
+                              String employer, String monday, String tuesday, String wednesday,
+                              String thursday, String friday, String saturday, String sunday)
+    {
+        ContentValues cv = new ContentValues();
+        cv.put(UserContract.UserEntry.COLUMN_NAME, name);
+        cv.put(UserContract.UserEntry.COLUMN_JOB, job);
+        cv.put(UserContract.UserEntry.COLUMN_CITY, city);
+        cv.put(UserContract.UserEntry.COLUMN_PRICE, price);
+        cv.put(UserContract.UserEntry.COLUMN_ISEMPLOYER, employer);
+        cv.put(UserContract.UserEntry.COLUMN_MONDAY, monday);
+        cv.put(UserContract.UserEntry.COLUMN_TUESDAY, tuesday);
+        cv.put(UserContract.UserEntry.COLUMN_WEDNESDAY, wednesday);
+        cv.put(UserContract.UserEntry.COLUMN_THURSDAY, thursday);
+        cv.put(UserContract.UserEntry.COLUMN_FRIDAY, friday);
+        cv.put(UserContract.UserEntry.COLUMN_SATURDAY, saturday);
+        cv.put(UserContract.UserEntry.COLUMN_SUNDAY, sunday);
+        return getContentResolver().insert(UserContract.UserEntry.CONTENT_URI, cv);
+
+    }
+
+
+/*  public long addUser(String name, String job, String city, String price,
+                      String employer, String monday, String tuesday, String wednesday,
+                      String thursday, String friday, String saturday, String sunday){
+        long userId;
+        Uri insertedUri;
+      ContentValues cv = new ContentValues();
+      cv.put(UserContract.UserEntry.COLUMN_NAME, name);
+      cv.put(UserContract.UserEntry.COLUMN_JOB, job);
+      cv.put(UserContract.UserEntry.COLUMN_CITY, city);
+      cv.put(UserContract.UserEntry.COLUMN_ISEMPLOYER, employer);
+      cv.put(UserContract.UserEntry.COLUMN_PRICE, price);
+      cv.put(UserContract.UserEntry.COLUMN_MONDAY, monday);
+      cv.put(UserContract.UserEntry.COLUMN_TUESDAY, tuesday);
+      cv.put(UserContract.UserEntry.COLUMN_WEDNESDAY, wednesday);
+      cv.put(UserContract.UserEntry.COLUMN_THURSDAY, thursday);
+      cv.put(UserContract.UserEntry.COLUMN_FRIDAY, friday);
+      cv.put(UserContract.UserEntry.COLUMN_SATURDAY, saturday);
+      cv.put(UserContract.UserEntry.COLUMN_SUNDAY, sunday);
+      insertedUri = mResolver.insert(UserContract.UserEntry.CONTENT_URI, cv);
+      userId = ContentUris.parseId(insertedUri);
+    return userId;
+  }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -111,6 +168,14 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         }
        if (id == R.id.day_calendar_requests) {
             Intent intent = new Intent(MainActivity.this, ListOfDayRequestsActivity.class);
+            startActivity(intent);
+        }
+        /*if(id == R.id.accepted_requests){
+            Intent intent = new Intent(MainActivity.this, AcceptedActivity.class);
+            startActivity(intent);
+        }*/
+        if(id == R.id.profile){
+            Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         }
 
@@ -142,15 +207,19 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
                                         String buttonFriday= userAvailableDays.getString(4);
                                         String buttonSaturday = userAvailableDays.getString(5);
                                         String buttonSunday = userAvailableDays.getString(6);
-
+                                        insertNewUser(userName,userJob,userCity,userPrice,"false",
+                                                buttonMonday,buttonTuesday,buttonWednesday,buttonThursday,
+                                                buttonFriday,buttonSaturday,buttonSunday);
                                         mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity,
                                                 userPrice, userAvailableDays,
                                                 buttonMonday, buttonTuesday, buttonWednesday,
                                                 buttonThursday, buttonFriday, buttonSaturday, buttonSunday));
+                                        Log.d(TAG, "onResponse: "+ jsonArray.getJSONObject(i)+ " "+i);
                                     }
                                     mUserAdapter = new UserAdapter(MainActivity.this, mSingleItemUser, mItemClickListener);
                                     mUserRecyclerView.setAdapter(mUserAdapter);
                                     mUserAdapter.notifyDataSetChanged();
+
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

@@ -17,4 +17,17 @@
         android:orderInCategory="99"
         android:title="@string/day_calendar_request_activity"
         app:showAsAction="ifRoom" />
+ <!--   <item
+        android:id="@+id/accepted_requests"
+        android:orderInCategory="102"
+        android:title="@string/accepted_requests"
+        app:showAsAction="ifRoom">
+    </item>-->
+    <item
+        android:id="@+id/profile"
+        android:orderInCategory="98"
+        android:title="Profile"
+        app:showAsAction="ifRoom">
+    </item>
+
 </menu>

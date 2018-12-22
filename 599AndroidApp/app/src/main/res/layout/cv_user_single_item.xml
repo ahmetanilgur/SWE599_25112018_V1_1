@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,13 +11,14 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="8"
         android:orientation="vertical"
         android:padding="16dp"
         android:rowCount="8"
+        android:columnCount="8"
         android:visibility="visible">
 
         <ImageView
+            android:id="@+id/tv_single_item_photo"
             style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -28,8 +30,7 @@
             android:layout_marginBottom="5dp"
             android:contentDescription="@string/todo"
             android:fontFamily="sans-serif"
-            android:src="@drawable/ppfbphoto"
-            android:id="@+id/tv_single_item_photo"
+            android:src="@mipmap/ic_launcher_round"
             android:text="@string/imaj"></ImageView>
 
         <TextView
