@@ -91,13 +91,13 @@ public class UserProvider extends ContentProvider {
                 cursor = mOpenHelper.getReadableDatabase().query(
                         /* Table we are going to query */
                         UserContract.UserEntry.TABLE_NAME,
-                        projection,
-                        UserContract.UserEntry._ID + " = ? ",
-                        selectionArguments,
+                        null,
+                        null,
+                        null,
                         null,
                         null,
                         sortOrder);
-
+        Log.d(TAG, "query: query eyledi"+ cursor.getCount());
 
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
         return cursor;

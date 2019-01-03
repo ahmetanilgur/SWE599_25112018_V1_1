@@ -1,5 +1,6 @@
 package com.example.ahmetanilgur.fakearmut;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -38,6 +40,7 @@ public class ProfileActivity extends AppCompatActivity implements ItemClickListe
         setContentView(R.layout.activity_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Button btn_back = findViewById(R.id.btn_back);
         mProfileSingleItemUser = new ArrayList<>();
         mProfileUserRequestQueue= Volley.newRequestQueue(this);
         mProfileRecyclerView = findViewById(R.id.rv_profile);
@@ -45,7 +48,14 @@ public class ProfileActivity extends AppCompatActivity implements ItemClickListe
         mProfileRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mProfileRecyclerView.setAdapter(mProfileAdapter);
         mProfileAdapter = new ProfileAdapter(ProfileActivity.this, mProfileSingleItemUser, this);
-
+        btn_back.setBackgroundColor(Color.RED);
+        btn_back.setTextColor(Color.WHITE);
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         Log.d("dd", "onCreate: "+PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext())
                 .getString("login_preferences",""));
@@ -53,7 +63,7 @@ public class ProfileActivity extends AppCompatActivity implements ItemClickListe
     }
     private void parseProfileJSON() {
 
-        String userUrl = "http://192.168.42.174:8000/profile/"+PreferenceManager
+        String userUrl = BuildConfig.nowApiUrl+"/profile/"+PreferenceManager
                 .getDefaultSharedPreferences(getApplicationContext())
                 .getString("login_preferences","");
         JsonObjectRequest request = new JsonObjectRequest

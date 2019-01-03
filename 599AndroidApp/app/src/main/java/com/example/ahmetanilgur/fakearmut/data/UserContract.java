@@ -1,13 +1,7 @@
 package com.example.ahmetanilgur.fakearmut.data;
 
-import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.net.Uri;
 import android.provider.BaseColumns;
-import android.util.Log;
-
-import static android.content.ContentValues.TAG;
-import static com.example.ahmetanilgur.fakearmut.data.UserContract.UserEntry.CONTENT_URI;
 
 public class UserContract {
     public static final String CONTENT_AUTHORITY = "com.example.ahmetanilgur.fakearmut";

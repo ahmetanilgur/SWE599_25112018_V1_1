@@ -18,11 +18,11 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        final String SQL_CREATE_USERLIST_TABLE = "CREATE TABLE " +
+        final String SQL_CREATE_USERLIST_TABLE = " CREATE TABLE " +
             UserEntry.TABLE_NAME + " ("+
             UserEntry._ID +" INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 UserEntry.COLUMN_NAME + " TEXT NOT NULL UNIQUE,"+
-                UserEntry.COLUMN_JOB + " TEXT NOT NULL,"+
+                UserEntry.COLUMN_JOB + " TEXT   NOT NULL,"+
                 UserEntry.COLUMN_CITY + " TEXT NOT NULL,"+
                 UserEntry.COLUMN_PRICE + " TEXT NOT NULL,"+
                 UserEntry.COLUMN_ISEMPLOYER + " TEXT NOT NULL,"+

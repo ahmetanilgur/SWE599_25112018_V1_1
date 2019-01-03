@@ -50,4 +50,5 @@
     <string name="profile_pic">TODO</string>
     <string name="my_profile">My Profile</string>
     <string name="profile_desc">You can see your reservations below. \nClick any of them to cancel.</string>
+    <string name="back">Back</string>
 </resources>

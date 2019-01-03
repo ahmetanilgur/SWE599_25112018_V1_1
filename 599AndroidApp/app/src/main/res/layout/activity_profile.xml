@@ -48,6 +48,12 @@
         android:textColor="@color/design_default_color_primary"
         android:textSize="18sp" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:id="@+id/btn_back"
+        />
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

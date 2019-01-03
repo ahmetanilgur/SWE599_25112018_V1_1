@@ -1,7 +1,6 @@
 package com.example.ahmetanilgur.fakearmut;
 
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +19,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +28,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ahmetanilgur.fakearmut.data.UserContract;
 import com.example.ahmetanilgur.fakearmut.data.UserDBHelper;
+import com.example.ahmetanilgur.fakearmut.utilities.NotificationUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,8 +74,8 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
     @Override
     public void onListItemClick(int clickedItemIndex) {
         Log.v("onClick","Item#"+Integer.toString(clickedItemIndex));
-    }
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,8 +97,9 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         String jobString = sortPref.getString("sort_job","House Painting");
         parseJSON(cityString, priceString, jobString);
         Log.d(TAG, "onCreate: buildconfig dalgası: "+BuildConfig.nowApiUrl);
+        showUsers();
+        checkforDayReq();
     }
-
   Uri insertNewUser (String name, String job, String city, String price,
                               String employer, String monday, String tuesday, String wednesday,
                               String thursday, String friday, String saturday, String sunday)
@@ -114,33 +117,33 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         cv.put(UserContract.UserEntry.COLUMN_FRIDAY, friday);
         cv.put(UserContract.UserEntry.COLUMN_SATURDAY, saturday);
         cv.put(UserContract.UserEntry.COLUMN_SUNDAY, sunday);
-        return getContentResolver().insert(UserContract.UserEntry.CONTENT_URI, cv);
 
+        return getContentResolver().insert(UserContract.UserEntry.CONTENT_URI, cv);
     }
 
+ void showUsers (){
+     //JSONArray userAvailableDays = new JSONArray();
+     Cursor cursor =getContentResolver().query(UserContract.UserEntry.CONTENT_URI,null,null,null,null);
+    for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()){
+        String userName = cursor.getString(cursor.getColumnIndex("name"));
+        String userJob = cursor.getString(cursor.getColumnIndex("job"));
+        String userCity = cursor.getString(cursor.getColumnIndex("city"));
+        String userPrice = cursor.getString(cursor.getColumnIndex("price"));
+        String buttonMonday = cursor.getString(cursor.getColumnIndex("monday"));
+        String buttonTuesday = cursor.getString(cursor.getColumnIndex("tuesday"));
+        String buttonWednesday = cursor.getString(cursor.getColumnIndex("wednesday"));
+        String buttonThursday = cursor.getString(cursor.getColumnIndex("thursday"));
+        String buttonFriday = cursor.getString(cursor.getColumnIndex("friday"));
+        String buttonSaturday = cursor.getString(cursor.getColumnIndex("saturday"));
+        String buttonSunday = cursor.getString(cursor.getColumnIndex("sunday"));
 
-/*  public long addUser(String name, String job, String city, String price,
-                      String employer, String monday, String tuesday, String wednesday,
-                      String thursday, String friday, String saturday, String sunday){
-        long userId;
-        Uri insertedUri;
-      ContentValues cv = new ContentValues();
-      cv.put(UserContract.UserEntry.COLUMN_NAME, name);
-      cv.put(UserContract.UserEntry.COLUMN_JOB, job);
-      cv.put(UserContract.UserEntry.COLUMN_CITY, city);
-      cv.put(UserContract.UserEntry.COLUMN_ISEMPLOYER, employer);
-      cv.put(UserContract.UserEntry.COLUMN_PRICE, price);
-      cv.put(UserContract.UserEntry.COLUMN_MONDAY, monday);
-      cv.put(UserContract.UserEntry.COLUMN_TUESDAY, tuesday);
-      cv.put(UserContract.UserEntry.COLUMN_WEDNESDAY, wednesday);
-      cv.put(UserContract.UserEntry.COLUMN_THURSDAY, thursday);
-      cv.put(UserContract.UserEntry.COLUMN_FRIDAY, friday);
-      cv.put(UserContract.UserEntry.COLUMN_SATURDAY, saturday);
-      cv.put(UserContract.UserEntry.COLUMN_SUNDAY, sunday);
-      insertedUri = mResolver.insert(UserContract.UserEntry.CONTENT_URI, cv);
-      userId = ContentUris.parseId(insertedUri);
-    return userId;
-  }*/
+     /*   mSingleItemUser.add(new SingleItemUser(userName, userJob, userCity,
+                userPrice, userAvailableDays,
+                buttonMonday, buttonTuesday, buttonWednesday,
+                buttonThursday, buttonFriday, buttonSaturday, buttonSunday));
+        Log.d(TAG, "showUsers: "+ cursor.getString(cursor.getColumnIndex("city")));*/
+    }
+ }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -232,4 +235,52 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
                 });
         mUserRequestQueue.add(request);
     }
+    String username;
+    JSONArray dayreqjsonarray;
+
+    private void checkforDayReq(){
+
+        StringRequest firstStringRequest = new StringRequest(Request.Method.GET,
+                BuildConfig.nowApiUrl+"/requesteddaylist/"+PreferenceManager
+                        .getDefaultSharedPreferences(getApplicationContext())
+                        .getString("login_preferences",""),
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            dayreqjsonarray = new JSONArray(response);
+                            Log.d(TAG, "onResponseza: "+ dayreqjsonarray);
+                            //   Log.d(TAG, "onResponse: try: "+dayreqjsonarray.getString(0));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        Log.d(TAG, "reel response: "+dayreqjsonarray.length());
+                        if(dayreqjsonarray.length()<2){
+                            //2 yazmasının nedeni 1 ise null geliyor 2 ise username ve day
+                            Log.d(TAG, "onResponse: girdi ife");
+                        }
+                        else {
+                            try {
+                                username=dayreqjsonarray.getString(1);
+     //                           Log.d(TAG, "onResponseelsetry: "+ username);
+                                NotificationUtils.remindUserBecauseCharging(getApplicationContext(), username);
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            // Display the first 500 characters of the response string.
+
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse didnt work_requesteddaylist "+error);
+            }
+        });
+        Volley.newRequestQueue(getApplicationContext()).add(firstStringRequest);
+    }
+
 }

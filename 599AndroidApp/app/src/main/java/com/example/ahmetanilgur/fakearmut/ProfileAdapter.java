@@ -90,7 +90,7 @@ public class ProfileViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View v) {
         // Log.d(TAG, "onClick: "+ ((Button) v).getTag());
-        String userUrl = "http://192.168.42.174:8000/canceldayrequest/" + PreferenceManager
+        String userUrl = BuildConfig.nowApiUrl+"/canceldayrequest/" + PreferenceManager
                 .getDefaultSharedPreferences(mContext.getApplicationContext())
                 .getString("login_preferences", "") + "&" + ((Button) v).getTag();
         Log.d(TAG, "userUrl: " + userUrl);
