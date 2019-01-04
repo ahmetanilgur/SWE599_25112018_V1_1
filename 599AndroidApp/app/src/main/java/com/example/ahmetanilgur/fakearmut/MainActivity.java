@@ -1,5 +1,6 @@
 package com.example.ahmetanilgur.fakearmut;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
@@ -99,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         Log.d(TAG, "onCreate: buildconfig dalgası: "+BuildConfig.nowApiUrl);
         showUsers();
         checkforDayReq();
+        checkforReq();
     }
   Uri insertNewUser (String name, String job, String city, String price,
                               String employer, String monday, String tuesday, String wednesday,
@@ -282,5 +284,34 @@ public class MainActivity extends AppCompatActivity implements ItemClickListener
         });
         Volley.newRequestQueue(getApplicationContext()).add(firstStringRequest);
     }
+
+    private void checkforReq(){
+
+        StringRequest sr = new StringRequest(Request.Method.GET,
+                BuildConfig.nowApiUrl+"/requestlist/"+PreferenceManager
+                        .getDefaultSharedPreferences(getApplicationContext())
+                        .getString("login_preferences",""),
+                new Response.Listener<String>() {
+                    public void onResponse(String response) {
+                        Log.d(TAG, "reel response: "+response.length());
+                        if(response.length()<1){
+                            Log.d(TAG, "onResponse: girdi ife");
+                        }
+                        else {
+                            username=response;
+                            NotificationUtils.remindUserForANewRequest(getApplicationContext(), username);
+                        }
+                        }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse didnt work_2"+error);
+            }
+        });
+
+        Volley.newRequestQueue(getApplicationContext()).add(sr);
+    }
+
+
 
 }
