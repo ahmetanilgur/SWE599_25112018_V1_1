@@ -9,3 +9,9 @@
 /build
 /captures
 .externalNativeBuild
+599AndroidApp/.idea/codeStyles/Project.xml
+599AndroidApp/.idea/gradle.xml
+599AndroidApp/.idea/misc.xml
+599AndroidApp/.idea/runConfigurations.xml
+599AndroidApp/local.properties
+*.properties

@@ -70,6 +70,9 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+        <receiver android:name=".utilities.ActionReceiver" />
+
     </application>
 
 </manifest>
